@@ -1,0 +1,100 @@
+    
+on boot
+# QMVS for MAIN
+    mkdir /sys/class/sec/sec_nad_balancer/ 0777 root root
+
+on late-init
+# Permissions for QUEST
+    chown system radio /sys/class/sec/sec_nad/nad_acat
+    chmod 0664 /sys/class/sec/sec_nad/nad_acat
+    chown system radio /sys/class/sec/sec_nad/nad_api
+    chmod 0444 /sys/class/sec/sec_nad/nad_api
+    chown system radio /sys/class/sec/sec_nad/nad_ddrtest_remain_count
+    chmod 0444 /sys/class/sec/sec_nad/nad_ddrtest_remain_count
+    chown system radio /sys/class/sec/sec_nad/nad_dram
+    chmod 0444 /sys/class/sec/sec_nad/nad_dram
+    chown system radio /sys/class/sec/sec_nad/nad_dram_debug
+    chmod 0444 /sys/class/sec/sec_nad/nad_dram_debug
+    chown system radio /sys/class/sec/sec_nad/nad_dram_err_addr
+    chmod 0444 /sys/class/sec/sec_nad/nad_dram_err_addr
+    chown system radio /sys/class/sec/sec_nad/nad_end
+    chmod 0200 /sys/class/sec/sec_nad/nad_end
+    chown system radio /sys/class/sec/sec_nad/nad_erase
+    chmod 0664 /sys/class/sec/sec_nad/nad_erase    
+    chown system radio /sys/class/sec/sec_nad/nad_info
+    chmod 0664 /sys/class/sec/sec_nad/nad_info    
+    chown system radio /sys/class/sec/sec_nad/nad_logs
+    chmod 0200 /sys/class/sec/sec_nad/nad_logs
+    chown system radio /sys/class/sec/sec_nad/nad_qdaf_control
+    chmod 0664 /sys/class/sec/sec_nad/nad_qdaf_control
+    chown system radio /sys/class/sec/sec_nad/nad_qdaf_debug
+    chmod 0200 /sys/class/sec/sec_nad/nad_qdaf_debug
+    chown system radio /sys/class/sec/sec_nad/nad_qdaf_result
+    chmod 0664 /sys/class/sec/sec_nad/nad_qdaf_result
+    chown system radio /sys/class/sec/sec_nad/nad_qmvs_remain_count
+    chmod 0444 /sys/class/sec/sec_nad/nad_qmvs_remain_count    
+    chown system radio /sys/class/sec/sec_nad/nad_result
+    chmod 0664 /sys/class/sec/sec_nad/nad_result  
+    chown system radio /sys/class/sec/sec_nad/nad_stat
+    chmod 0444 /sys/class/sec/sec_nad/nad_stat
+    chown system radio /sys/class/sec/sec_nad/nad_stat
+    chmod 0444 /sys/class/sec/sec_nad/nad_stat    
+    chown system radio /sys/class/sec/sec_nad/nad_support
+    chmod 0444 /sys/class/sec/sec_nad/nad_support  
+    chown system radio /sys/class/sec/sec_nad_balancer/balancer
+    chmod 0664 /sys/class/sec/sec_nad_balancer/balancer
+    chown system radio /sys/class/sec/sec_nad_balancer/timeout
+    chmod 0664 /sys/class/sec/sec_nad_balancer/timeout
+    chown system radio /sys/class/sec/sec_nad_balancer/run
+    chmod 0664 /sys/class/sec/sec_nad_balancer/run
+
+	# we cannot execute chown/chmod at /system partition
+    #chown system radio /system/bin/quest/quest_short.sh
+    #chmod 0777 /system/bin/quest/quest_short.sh
+    #chown system radio /system/bin/quest/quest_main.sh
+    #chmod 0777 /system/bin/quest/quest_main.sh
+    #chown system radio /system/bin/quest/arrange_quest_logs.sh
+    #chmod 0777 /system/bin/quest/arrange_quest_logs.sh    
+    #chown system radio /system/bin/quest/move_questresult.sh
+    #chmod 0777 /system/bin/quest/move_questresult.sh    
+    #chown system radio /system/bin/quest/quest_debugging.sh
+    #chmod 0777 /system/bin/quest/quest_debugging.sh           
+    #chown system radio /system/bin/quest/quest_util.sh
+    #chmod 0777 /system/bin/quest/quest_util.sh
+    #chown system radio /system/bin/quest/remove_files.sh
+    #chmod 0777 /system/bin/quest/remove_files.sh    
+    #chown system radio /system/bin/quest/qdaf.sh
+    #chmod 0777 /system/bin/quest/qdaf.sh    
+    #chown system radio /system/bin/quest/QMESA_64
+    #chmod 0777 /system/bin/quest/QMESA_64
+    #chown system radio /system/bin/quest/aes_test
+    #chmod 0777 /system/bin/quest/aes_test
+    #chown system radio /system/bin/quest/aes_test_static
+    #chmod 0777 /system/bin/quest/aes_test_static
+    #chown system radio /system/bin/quest/cache_coherency
+    #chmod 0777 /system/bin/quest/cache_coherency
+    #chown system radio /system/bin/quest/cpu_clk_switch
+    #chmod 0777 /system/bin/quest/cpu_clk_switch
+    #chown system radio /system/bin/quest/ddr_clk_switch
+    #chmod 0777 /system/bin/quest/ddr_clk_switch
+    #chown system radio /system/bin/quest/hmac_test
+    #chmod 0777 /system/bin/quest/hmac_test
+    #chown system radio /system/bin/quest/hmac_test_static
+    #chmod 0777 /system/bin/quest/hmac_test_static
+    #chown system radio /system/bin/quest/icache_stress
+    #chmod 0777 /system/bin/quest/icache_stress
+    #chown system radio /system/bin/quest/NOTICE
+    #chmod 0777 /system/bin/quest/NOTICE
+
+    chown system radio /sys/devices/virtual/sec/switch/usb_to_ta
+    chmod 0777 /sys/devices/virtual/sec/switch/usb_to_ta
+
+on post-fs-data
+    mkdir /data/log/quest/ 
+    wait /dev/block/by-name/logfs
+    mount vfat /dev/block/by-name/logfs /data/log/quest
+
+    mkdir /data/log/quest/SMD/ 
+    mkdir /data/log/quest/CAL/ 
+    mkdir /data/log/quest/MAIN/ 
+    mkdir /data/log/quest/LASTFAIL/
